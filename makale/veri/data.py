@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Föy 3 "Marka Araştırması" veri seti — 25 teslim x 3 marka önerisi
+# Çalışma Kâğıdı 3 "Marka Araştırması" veri seti — 25 teslim x 3 marka önerisi
 # alan: (ogrenci, grup, [ (marka, kategori, mensei, anahtar_kelimeler[]) x3 ])
 # kategori: giyim, aksesuar-deri, taki-mucevher, parfum-koku, kozmetik-bakim,
 #           ev-yasam, seramik, kitap-plak-kirtasiye, muzik-enstruman, sanat-obje,
