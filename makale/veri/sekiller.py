@@ -9,11 +9,12 @@ from matplotlib.patches import PathPatch
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from data import DATA
 from kod import KOD
+from deger import DEGER
 
 OUT = "/home/user/studyodersi/makale/sekil"
 SURFACE, INK, INK2, MUTED, GRID, AXIS = "#fcfcfb", "#0b0b0b", "#52514e", "#898781", "#e1e0d9", "#c3c2b7"
 SERIES = "#2a78d6"                                             # tek seri → tek renk
-ORDINAL = ["#86b6ef", "#5598e7", "#2a78d6", "#1c5cab", "#104281"]  # sıralı ölçek (doğrulandı)
+ORDINAL = ["#86b6ef", "#2a78d6", "#104281"]  # sıralı ölçek (doğrulandı)
 
 plt.rcParams.update({
     "font.family": "DejaVu Sans", "font.size": 9,
@@ -22,7 +23,14 @@ plt.rcParams.update({
     "axes.edgecolor": AXIS, "text.color": INK,
 })
 
-SOLO = ["Ön yapısal", "Tek yapılı", "Çok yapılı", "İlişkisel", "Soyutlanmış"]
+SOM = {1: "Sıfatta kalan", 2: "Öğe adlandıran", 3: "Mekânda yer tutan"}
+
+
+def solo_of(level, named):
+    """ÇÖD kodlarını SOLO düzeylerine eşler (0-4)."""
+    if level <= 2:
+        return level            # 0→ön yapısal, 1→tek yapılı, 2→çok yapılı
+    return 4 if named else 3    # adlandırılmış aygıt → soyutlanmış, diğeri → ilişkisel
 
 
 def rbar(ax, y, width, color, h=0.52, xmax=None):
@@ -59,9 +67,10 @@ def hbars(labels, values, fname, title, subtitle, colors=None, note=None,
     ax.spines["left"].set_color(AXIS)
     ax.spines["left"].set_linewidth(0.8)
     ax.tick_params(axis="y", length=0)
-    ax.set_title(title, fontsize=10.5, color=INK, loc="left", pad=20, weight="bold")
-    ax.text(0, 1.028, subtitle, transform=ax.transAxes, fontsize=8.5,
-            color=MUTED, va="bottom")
+    ax.set_title(title, fontsize=10.5, color=INK, loc="left", pad=24, weight="bold")
+    ax.annotate(subtitle, xy=(0, 1), xycoords="axes fraction", xytext=(0, 6),
+                textcoords="offset points", fontsize=8.5, color=MUTED,
+                va="bottom", ha="left")
     fig.tight_layout()
     if note:
         fig.text(ax.get_position().x0, 0.002, note, fontsize=7.5, color=MUTED, va="bottom")
@@ -71,47 +80,60 @@ def hbars(labels, values, fname, title, subtitle, colors=None, note=None,
     print("✓", fname)
 
 
-# ─── Şekil: SOLO düzey dağılımı ────────────────────────────────────────────
-lv = [l for _, _, l, _ in KOD]
-c = collections.Counter(lv)
-hbars([f"{SOLO[i]}" for i in range(5)], [c[i] for i in range(5)],
-      "sekil-solo-dagilim.png",
-      "Marka önerilerinin SOLO düzeyine göre dağılımı",
-      f"n = {len(KOD)} marka önerisi · yüzdeler toplam içindeki pay",
-      colors=ORDINAL, pct_of=len(KOD),
-      note="Düzeyler sıralıdır (ön yapısaldan soyutlanmışa); renk koyulaşması düzey sırasını gösterir.")
+# ─── Şekil: markayı okuma — değer eksenleri ────────────────────────────────
+brands = [x for _, _, bl in DATA for x in bl]
+dg = collections.Counter(v for x in brands for v in DEGER[x[0]])
+ANA = [(k, v) for k, v in dg.most_common() if v >= 3]
+kuyruk = sum(v for k, v in dg.most_common() if v < 3)
+ANA.append(("Diğer (4 eksen)", kuyruk))
+hbars([k for k, _ in ANA], [v for _, v in ANA], "sekil-deger-eksenleri.png",
+      "Öğrencilerin markayı okuduğu değer eksenleri",
+      "n = 75 marka · bir marka birden çok eksende okunabilir",
+      pct_of=len(brands),
+      note="\"Diğer\": doğayla bağ (2), uzmanlık ve danışmanlık (1), belirtilmemiş (2).")
 
-# ─── Şekil: öğrencilerin ulaştığı en yüksek düzey ──────────────────────────
+# ─── Şekil: kararların somutluğu ───────────────────────────────────────────
+c = collections.Counter(k[2] for k in KOD)
+hbars([SOM[i] for i in (1, 2, 3)], [c[i] for i in (1, 2, 3)],
+      "sekil-somutluk.png",
+      "Anahtar kelimelerin mekânsal karara dönüşme somutluğu",
+      f"n = {len(KOD)} marka önerisi",
+      colors=ORDINAL, pct_of=len(KOD),
+      note="Üç grup sıralıdır: sıfattan mekândaki konuma.\n26 \"mekânda yer tutan\" kararın 12'si markanın kendi diliyle adlandırılmıştır.")
+
+# ─── Şekil: öğrenci profili ────────────────────────────────────────────────
 per = collections.defaultdict(list)
-for s, b, l, a in KOD:
-    per[s].append(l)
+for s_, m, l, n, a in KOD:
+    per[s_].append(l)
 enyuksek = collections.Counter(max(v) for v in per.values())
 baskin = collections.Counter(statistics.mode(v) for v in per.values())
 fig, ax = plt.subplots(figsize=(7.2, 3.2))
-x = range(5)
+x = range(3)
 w = 0.30
-for off, data, lab, col in ((-w/2, enyuksek, "ulaşılan en yüksek düzey", SERIES),
-                            (w/2, baskin, "üç önerideki baskın düzey", "#eb6834")):
-    ax.bar([i + off for i in x], [data[i] for i in x], width=w - 0.04,
+for off, data, lab, col in ((-w/2, enyuksek, "üç öneride ulaşılan en somut karar", SERIES),
+                            (w/2, baskin, "üç öneride baskın olan karar", "#eb6834")):
+    ax.bar([i + off for i in x], [data[i+1] for i in x], width=w - 0.04,
            color=col, edgecolor="none", zorder=3, label=lab)
     for i in x:
-        if data[i]:
-            ax.text(i + off, data[i] + 0.3, str(data[i]), ha="center",
+        if data[i+1]:
+            ax.text(i + off, data[i+1] + 0.3, str(data[i+1]), ha="center",
                     fontsize=8.5, color=INK2)
 ax.set_xticks(list(x))
-ax.set_xticklabels(SOLO, fontsize=9)
+ax.set_xticklabels([SOM[i+1] for i in x], fontsize=9)
 ax.set_ylim(0, max(max(enyuksek.values()), max(baskin.values())) + 2)
 ax.set_ylabel("öğrenci sayısı", fontsize=8.5, color=INK2)
 ax.yaxis.grid(True, color=GRID, linewidth=0.8, zorder=0)
 ax.set_axisbelow(True)
-for s in ("top", "right"):
-    ax.spines[s].set_visible(False)
+for sp in ("top", "right"):
+    ax.spines[sp].set_visible(False)
 ax.tick_params(length=0)
 ax.legend(frameon=False, fontsize=8.5, loc="upper left", labelcolor=INK2)
-ax.set_title("Öğrencilerin SOLO düzeyi profili", fontsize=10.5, loc="left",
-             pad=15, weight="bold")
-ax.text(0, 1.055, "n = 25 öğrenci · her öğrenci üç marka önerisi getirmiştir",
-        transform=ax.transAxes, fontsize=8.5, color=MUTED, va="bottom")
+ax.set_title("Öğrenci başına karar somutluğu", fontsize=10.5, loc="left",
+             pad=26, weight="bold")
+ax.annotate("n = 25 öğrenci · her öğrenci üç marka önerisi getirmiştir",
+            xy=(0, 1), xycoords="axes fraction", xytext=(0, 6),
+            textcoords="offset points", fontsize=8.5, color=MUTED,
+            va="bottom", ha="left")
 fig.tight_layout()
 fig.savefig(f"{OUT}/sekil-ogrenci-profili.png", bbox_inches="tight")
 plt.close(fig)
@@ -123,7 +145,7 @@ AD = {"a": "Sergileme birimi (raf, kaide, vitrin, niş)", "m": "Malzeme ve yüze
       "u": "Üretim görünürlüğü (atölye)", "k": "Kişiselleştirme ve etkileşim istasyonu",
       "t": "Dijital ve teknoloji", "r": "Renk", "o": "Oturma ve dinlenme",
       "s": "Koku, ses ve duyusal donatı"}
-ca = collections.Counter(x for _, _, _, a in KOD for x in a.split(",") if x)
+ca = collections.Counter(x for *_, a in KOD for x in a.split(",") if x)
 k, v = zip(*ca.most_common())
 hbars([AD[i] for i in k], list(v), "sekil-aygit-repertuvari.png",
       "Mekânsal kararların tasarım aygıtı aileleri",
@@ -133,7 +155,7 @@ hbars([AD[i] for i in k], list(v), "sekil-aygit-repertuvari.png",
 
 # ─── Şekil: anahtar kelime tematik kümeleri ────────────────────────────────
 from analiz import TEMA
-kws = [w for _, _, bl in DATA for b in bl for w in b[4]]
+kws = [w for x in brands for w in x[4]]
 ck = collections.Counter(kws)
 tema = sorted(((sum(ck[y] for y in set(ws)), t) for t, ws in TEMA.items()), reverse=True)
 hbars([t for _, t in tema], [n for n, _ in tema], "sekil-anahtar-kelime-temalari.png",
