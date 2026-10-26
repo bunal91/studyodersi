@@ -1,0 +1,76 @@
+ogrenci,grup,marka,kategori,mense,olcek,anahtar_kelimeler,cod,aygit_kodlari,aygit_adlari,adlandirilmis_aygit
+Zehra Meydanaçar,Mekân 2,Rouje,Giyim,YD,nis,zahmetsiz; fransız; nostaljik,2,m|i,malzeme ve yüzey; aydınlatma,0
+Zehra Meydanaçar,Mekân 2,Rivièra Maison,Ev ve yaşam,YD,nis,rafine; küresel; samimi,2,a|g,sergileme birimi; grafik / anlatı yüzeyi,0
+Zehra Meydanaçar,Mekân 2,AGMES,Takı ve mücevher,YD,nis,minimalist; heykelsi; el yapımı,2,a|m,sergileme birimi; malzeme ve yüzey,0
+Sude Elçin,Mekân 2,Bliss Atelier,Giyim,TR,nis,iddialı; elegant; sofistike,2,a|m,sergileme birimi; malzeme ve yüzey,0
+Sude Elçin,Mekân 2,Art Doku Halı,Ev ve yaşam,TR,nis,zanaat; kültürel; özenli,3,a|g|u|i,sergileme birimi; grafik / anlatı yüzeyi; üretim görünürlüğü; aydınlatma,1
+Sude Elçin,Mekân 2,Yaprak Aybak Design Studio,Ev ve yaşam,TR,nis,koleksiyonculuk; zamansızlık; kontrast,3,a|m,sergileme birimi; malzeme ve yüzey,0
+Hilal Nur Kahraman,Mekân 4,Hereu,Aksesuar ve deri,YD,nis,zanaat; akdeniz nostaljisi; sade şıklık,3,u|m|a,üretim görünürlüğü; malzeme ve yüzey; sergileme birimi,1
+Hilal Nur Kahraman,Mekân 4,Musto,Denizcilik,YD,kurumsal,performans; miras; denizcilik,3,m|a|k|t,malzeme ve yüzey; sergileme birimi; kişiselleştirme / etkileşim; dijital ve teknoloji,1
+Hilal Nur Kahraman,Mekân 4,Tom Dixon,Ev ve yaşam,YD,kurumsal,metalik; heykelsi; cüretkâr,3,a|i|m,sergileme birimi; aydınlatma; malzeme ve yüzey,1
+Yasin Bile,Mekân 3,Liman Market,Denizcilik,TR,nis,pratik; kapsamlı; dijital,3,t|k|d,dijital ve teknoloji; kişiselleştirme / etkileşim; dolaşım ve plan,1
+Yasin Bile,Mekân 3,Hipicon,Sanat objesi,TR,nis,özgün; modern; yaratıcı,3,a|m|i,sergileme birimi; malzeme ve yüzey; aydınlatma,0
+Yasin Bile,Mekân 3,Les Benjamins,Giyim,TR,kurumsal,dinamik; çağdaş; kültürel,3,i|m|g|t,aydınlatma; malzeme ve yüzey; grafik / anlatı yüzeyi; dijital ve teknoloji,0
+Ebrar Atalay,Mekân 4,Atelier Rebul,Parfüm ve koku,TR,kurumsal,zarafet; nostalji; duyusallık,2,a|m|i|s,sergileme birimi; malzeme ve yüzey; aydınlatma; koku / ses / duyusal donatı,0
+Ebrar Atalay,Mekân 4,Minoa,"Kitap, plak, kırtasiye",TR,nis,keşif; sakinlik; sosyalleşme,2,a|m|i|o,sergileme birimi; malzeme ve yüzey; aydınlatma; oturma ve dinlenme,0
+Ebrar Atalay,Mekân 4,Yargıcı Home,Ev ve yaşam,TR,kurumsal,doğallık; zamansızlık; konfor,2,m|a|o|i,malzeme ve yüzey; sergileme birimi; oturma ve dinlenme; aydınlatma,0
+İrem Vural,Mekân 5 / atanmamış,OPIA Leather,Aksesuar ve deri,TR,nis,zanaat; kişiselleştirme; zamansızlık,3,u|k|m,üretim görünürlüğü; kişiselleştirme / etkileşim; malzeme ve yüzey,1
+İrem Vural,Mekân 5 / atanmamış,Pekji,Parfüm ve koku,TR,nis,sanat; keşif; kimlik,3,a|d|k,sergileme birimi; dolaşım ve plan; kişiselleştirme / etkileşim,1
+İrem Vural,Mekân 5 / atanmamış,Desert Lobby,Takı ve mücevher,TR,nis,hikâye; sembol; el işçiliği,2,a|g|u,sergileme birimi; grafik / anlatı yüzeyi; üretim görünürlüğü,0
+Musa Kaya,Mekân 1,Atelier Rebul,Parfüm ve koku,TR,kurumsal,zarif; geleneksel; duyusal,2,a|m|s,sergileme birimi; malzeme ve yüzey; koku / ses / duyusal donatı,0
+Musa Kaya,Mekân 1,Mudo Concept,Ev ve yaşam,TR,kurumsal,modern; doğal; yaşam,2,a|m,sergileme birimi; malzeme ve yüzey,0
+Musa Kaya,Mekân 1,Miniso,Ev ve yaşam,YD,kurumsal,eğlenceli; renkli; erişilebilir,2,a|r,sergileme birimi; renk,0
+İldem Koca,Mekân 5 / atanmamış,Montale Paris,Parfüm ve koku,YD,nis,yolculuk; keşif; gizem,3,d|k|i|s,dolaşım ve plan; kişiselleştirme / etkileşim; aydınlatma; koku / ses / duyusal donatı,1
+İldem Koca,Mekân 5 / atanmamış,Āzlee,Takı ve mücevher,YD,nis,miras; tekillik; bağ,3,a|k,sergileme birimi; kişiselleştirme / etkileşim,1
+İldem Koca,Mekân 5 / atanmamış,Philini,Aksesuar ve deri,YD,nis,iz; zanaat; dönüşüm,3,m|u|a,malzeme ve yüzey; üretim görünürlüğü; sergileme birimi,1
+Ebrar Dinç,Mekân 3,Otrera,Aksesuar ve deri,TR,nis,el işçiliği; doğallık; özgünlük,2,a|m,sergileme birimi; malzeme ve yüzey,0
+Ebrar Dinç,Mekân 3,Chelebi,Takı ve mücevher,TR,nis,zarafet; doğallık; değer,2,a|m,sergileme birimi; malzeme ve yüzey,0
+Ebrar Dinç,Mekân 3,Cademe,Ev ve yaşam,TR,nis,kişiselleştirme; koku; yaratıcılık,3,k|s|a,kişiselleştirme / etkileşim; koku / ses / duyusal donatı; sergileme birimi,0
+Zeynep Berre Kürklü,Mekân 5 / atanmamış,Kartela,Giyim,TR,nis,zamansızlık; kalite; rahatlık,1,m|r|d,malzeme ve yüzey; renk; dolaşım ve plan,0
+Zeynep Berre Kürklü,Mekân 5 / atanmamış,Paden Cosmetics,Kozmetik ve bakım,TR,nis,renk çeşitliliği; kişisellik; erişilebilirlik,2,r|a|d,renk; sergileme birimi; dolaşım ve plan,0
+Zeynep Berre Kürklü,Mekân 5 / atanmamış,Shulebags,Aksesuar ve deri,TR,nis,vitrinleşme; kimlik; aidiyet,3,a|m|g,sergileme birimi; malzeme ve yüzey; grafik / anlatı yüzeyi,1
+Mehmet Yaman,Mekân 2,Voyant Apparel Co.,Giyim,TR,nis,özgünlük; tasarım; nakış,3,g|a,grafik / anlatı yüzeyi; sergileme birimi,0
+Mehmet Yaman,Mekân 2,Turtile Design,Ev ve yaşam,TR,nis,el işçiliği; mozaik; ışık,3,a|m|i,sergileme birimi; malzeme ve yüzey; aydınlatma,0
+Mehmet Yaman,Mekân 2,No:19 Istanbul,Takı ve mücevher,TR,nis,doğallık; seyahat; zamansızlık,3,m|g|r,malzeme ve yüzey; grafik / anlatı yüzeyi; renk,0
+Azat Doğru,Mekân 5 / atanmamış,IKEA,Ev ve yaşam,YD,kurumsal,fonksiyonel; sade; erişilebilir,2,a|s,sergileme birimi; koku / ses / duyusal donatı,0
+Azat Doğru,Mekân 5 / atanmamış,Bath & Body Works,Parfüm ve koku,YD,kurumsal,duyusal; canlı; keyifli,2,a|i|m,sergileme birimi; aydınlatma; malzeme ve yüzey,0
+Azat Doğru,Mekân 5 / atanmamış,Muji,Ev ve yaşam,YD,kurumsal,minimal; doğal; işlevsel,2,a,sergileme birimi,0
+Nurgül Karademir,Mekân 5 / atanmamış,Mise Montrail,Giyim,TR,nis,konforlu; özgün; doğal,2,m|o,malzeme ve yüzey; oturma ve dinlenme,0
+Nurgül Karademir,Mekân 5 / atanmamış,Labofem,Botanik,TR,nis,botanik; terapi; estetik,1,m,malzeme ve yüzey,0
+Nurgül Karademir,Mekân 5 / atanmamış,Gordion Coffee,Kahve,TR,nis,zanaat; ritüel; keşif,1,u,üretim görünürlüğü,0
+Oğuz Kağan Aksoy,Mekân 5 / atanmamış,Roots Ceramic,Seramik,TR,nis,doğal; özgün; dokusal,2,m|a|d,malzeme ve yüzey; sergileme birimi; dolaşım ve plan,0
+Oğuz Kağan Aksoy,Mekân 5 / atanmamış,Nuwé,Takı ve mücevher,TR,nis,zarif; özgün; kişisel,2,a|k|o,sergileme birimi; kişiselleştirme / etkileşim; oturma ve dinlenme,0
+Oğuz Kağan Aksoy,Mekân 5 / atanmamış,Caracal,Kozmetik ve bakım,TR,nis,güven; doğal; şeffaf,2,a|m|g,sergileme birimi; malzeme ve yüzey; grafik / anlatı yüzeyi,0
+Eda Yalnız,Mekân 4,Grace Brands,Ev ve yaşam,TR,kurumsal,zarafet; seçkinlik; yaşam,2,m|i|a|o,malzeme ve yüzey; aydınlatma; sergileme birimi; oturma ve dinlenme,0
+Eda Yalnız,Mekân 4,Zsa Zsa Zsu,Ev ve yaşam,TR,nis,renk; özgürlük; katman,3,r|a|d,renk; sergileme birimi; dolaşım ve plan,0
+Eda Yalnız,Mekân 4,Nautica,Giyim,YD,kurumsal,deniz; özgürlük; keşif,2,m|d|a,malzeme ve yüzey; dolaşım ve plan; sergileme birimi,0
+Buse Sandal,Mekân 5 / atanmamış,Esra Helvacı Butik,Giyim,TR,nis,zarif; sade; şık,1,m,malzeme ve yüzey,0
+Buse Sandal,Mekân 5 / atanmamış,Be One Jewelry,Takı ve mücevher,TR,nis,lüks; sıcaklık; aydınlık,2,m|i,malzeme ve yüzey; aydınlatma,0
+Buse Sandal,Mekân 5 / atanmamış,Selin Shoes,Ayakkabı,TR,nis,güçlü; konforlu; zamansız,2,a|o|m,sergileme birimi; oturma ve dinlenme; malzeme ve yüzey,0
+Eda Akşehirlioğlu,Mekân 1,Rot&Boa,Giyim,TR,nis,enerjik; tatil; ferah,1,r|m|d,renk; malzeme ve yüzey; dolaşım ve plan,0
+Eda Akşehirlioğlu,Mekân 1,Phytosurgence,Kozmetik ve bakım,YD,nis,deney; doğa; doğal içerik,1,k|m,kişiselleştirme / etkileşim; malzeme ve yüzey,0
+Eda Akşehirlioğlu,Mekân 1,Siedres,Giyim,TR,nis,renkli; deneysel; özgün,1,r|a,renk; sergileme birimi,0
+Burak Çetincan Horuzoğlu,Mekân 3,LunaWear,Giyim,TR,nis,minimalizm; doğallık; konfor,2,a|m|d,sergileme birimi; malzeme ve yüzey; dolaşım ve plan,0
+Burak Çetincan Horuzoğlu,Mekân 3,PixelForge,Teknoloji ve obje,TR,nis,teknoloji; esneklik; yenilik,3,u|t|a,üretim görünürlüğü; dijital ve teknoloji; sergileme birimi,0
+Burak Çetincan Horuzoğlu,Mekân 3,Solstice Jewelry,Takı ve mücevher,TR,nis,zarafet; güven; doğallık,2,m|i|a,malzeme ve yüzey; aydınlatma; sergileme birimi,0
+Ezgi Şahin,Mekân 5 / atanmamış,Sanat Gezgini,Sanat objesi,TR,nis,vurgu; erişilebilirlik; bütünlük,2,a|r|d,sergileme birimi; renk; dolaşım ve plan,0
+Ezgi Şahin,Mekân 5 / atanmamış,Kadıköy Müzik Market,"Kitap, plak, kırtasiye",TR,nis,samimiyet; yaşanmışlık; dinleme,2,i|o|m|a,aydınlatma; oturma ve dinlenme; malzeme ve yüzey; sergileme birimi,0
+Ezgi Şahin,Mekân 5 / atanmamış,Mydukkan,Müzik enstrümanı,TR,nis,vurgu; deneme; öğrenme,3,a|d|o|s,sergileme birimi; dolaşım ve plan; oturma ve dinlenme; koku / ses / duyusal donatı,0
+Esma Sofularlı,Mekân 3,Uniqlo,Giyim,YD,kurumsal,sadelik; düzen; konfor,2,a|d|m,sergileme birimi; dolaşım ve plan; malzeme ve yüzey,0
+Esma Sofularlı,Mekân 3,Oura,Teknoloji ve obje,YD,nis,teknoloji; kişisellik; sakinlik,2,t|k|i,dijital ve teknoloji; kişiselleştirme / etkileşim; aydınlatma,0
+Esma Sofularlı,Mekân 3,The Purest Solutions,Kozmetik ve bakım,TR,nis,saflık; bilimsellik; keşif,2,g|a|k,grafik / anlatı yüzeyi; sergileme birimi; kişiselleştirme / etkileşim,0
+Samet Diribaş,Mekân 2,Fibrika Store,Teknoloji ve obje,TR,nis,teknolojik; eğlenceli; özgün,2,u|r|a,üretim görünürlüğü; renk; sergileme birimi,0
+Samet Diribaş,Mekân 2,Orevo,Takı ve mücevher,TR,nis,heykelsi; mitolojik; güçlü,3,a|g|i,sergileme birimi; grafik / anlatı yüzeyi; aydınlatma,0
+Samet Diribaş,Mekân 2,Carpe,Giyim,TR,nis,alternatif; karanlık; özgür,3,r|i|a,renk; aydınlatma; sergileme birimi,0
+Sude Karman,Mekân 4,Kaft,Giyim,TR,nis,illüstrasyon; sanat; özgünlük,3,g|a|m|t,grafik / anlatı yüzeyi; sergileme birimi; malzeme ve yüzey; dijital ve teknoloji,0
+Sude Karman,Mekân 4,Arma Life,Giyim,TR,nis,dinamik; şehirli; konfor,3,a|m|o,sergileme birimi; malzeme ve yüzey; oturma ve dinlenme,0
+Sude Karman,Mekân 4,MAD Parfüm,Parfüm ve koku,TR,nis,esans; koku; duyusallık,3,k|s|t|g,kişiselleştirme / etkileşim; koku / ses / duyusal donatı; dijital ve teknoloji; grafik / anlatı yüzeyi,1
+Nehir Yavuz,Mekân 2,Kokulab,Parfüm ve koku,TR,nis,kişisellik; doğal; deneyim,1,k|m,kişiselleştirme / etkileşim; malzeme ve yüzey,0
+Nehir Yavuz,Mekân 2,Dilek Optik,Gözlük,TR,nis,güven; uyum; uzmanlık,1,d|k,dolaşım ve plan; kişiselleştirme / etkileşim,0
+Nehir Yavuz,Mekân 2,Only Japan Vinyl,"Kitap, plak, kırtasiye",TR,nis,koleksiyon; keşif; nostalji,1,a|o|m,sergileme birimi; oturma ve dinlenme; malzeme ve yüzey,0
+Ceren Sevgen,Mekân 1,Half Magic,Kozmetik ve bakım,YD,nis,özgüven; güç; sanat,1,a|r,sergileme birimi; renk,0
+Ceren Sevgen,Mekân 1,Ofline Jewelry Store,Takı ve mücevher,TR,nis,tutku; gizem; asilik,2,r|m|a,renk; malzeme ve yüzey; sergileme birimi,0
+Ceren Sevgen,Mekân 1,Liquides Imaginaires,Parfüm ve koku,YD,nis,mitoloji; simya; zarafet,2,a|m|r,sergileme birimi; malzeme ve yüzey; renk,0
+Zeynep Topuz,Mekân 5 / atanmamış,Abuello.co,Giyim,TR,nis,modern; zarif; özgün,1,i|m|a,aydınlatma; malzeme ve yüzey; sergileme birimi,0
+Zeynep Topuz,Mekân 5 / atanmamış,Adellabutik,Giyim,TR,nis,feminen; zarif; trend,0,,,0
+Zeynep Topuz,Mekân 5 / atanmamış,Baglovis,Aksesuar ve deri,TR,nis,modern; fonksiyonel; ulaşılabilir,0,,,0
