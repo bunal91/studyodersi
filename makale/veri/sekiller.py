@@ -92,59 +92,51 @@ hbars([k for k, _ in ANA], [v for _, v in ANA], "sekil-deger-eksenleri.png",
       pct_of=len(brands),
       note="\"Diğer\": doğayla bağ (2), uzmanlık ve danışmanlık (1), belirtilmemiş (2).")
 
-# ─── Şekil: kararların somutluğu ───────────────────────────────────────────
-c = collections.Counter(k[2] for k in KOD)
-hbars([SOM[i] for i in (1, 2, 3)], [c[i] for i in (1, 2, 3)],
-      "sekil-somutluk.png",
-      "Anahtar kelimelerin mekânsal karara dönüşme somutluğu",
-      f"n = {len(KOD)} marka önerisi",
-      colors=ORDINAL, pct_of=len(KOD),
-      note="Üç grup sıralıdır: sıfattan mekândaki konuma.\n26 \"mekânda yer tutan\" kararın 12'si markanın kendi diliyle adlandırılmıştır.")
+# ─── Şekil: Bitner'ın üç boyutu ───────────────────────────────────────────
+BITNER = {"i":"Ortam koşulları","r":"Ortam koşulları","s":"Ortam koşulları",
+ "a":"Mekânsal yerleşim ve işlevsellik","d":"Mekânsal yerleşim ve işlevsellik",
+ "o":"Mekânsal yerleşim ve işlevsellik","k":"Mekânsal yerleşim ve işlevsellik",
+ "t":"Mekânsal yerleşim ve işlevsellik","e":"Mekânsal yerleşim ve işlevsellik",
+ "q":"Mekânsal yerleşim ve işlevsellik",
+ "m":"İşaretler, simgeler ve eserler","g":"İşaretler, simgeler ve eserler",
+ "u":"İşaretler, simgeler ve eserler"}
+cb = collections.Counter(); kapsam = collections.Counter()
+for s_, m_, n_, a_ in KOD:
+    dims = {BITNER[x] for x in a_.split(",") if x}
+    for d_ in dims: cb[d_] += 1
+    kapsam[len(dims)] += 1
+k, v = zip(*cb.most_common())
+hbars(list(k), list(v), "sekil-bitner.png",
+      "Kararların servicescape boyutlarına dağılımı",
+      "n = 75 marka önerisi · bir öneri birden çok boyuta değinebilir",
+      pct_of=len(KOD),
+      note="Boyutlar Bitner (1992). Önerilerin yalnızca %28'i üç boyutu birden kurmaktadır.")
 
-# ─── Şekil: öğrenci profili ────────────────────────────────────────────────
-per = collections.defaultdict(list)
-for s_, m, l, n, a in KOD:
-    per[s_].append(l)
-enyuksek = collections.Counter(max(v) for v in per.values())
-baskin = collections.Counter(statistics.mode(v) for v in per.values())
-fig, ax = plt.subplots(figsize=(7.2, 3.2))
-x = range(3)
-w = 0.30
-for off, data, lab, col in ((-w/2, enyuksek, "üç öneride ulaşılan en somut karar", SERIES),
-                            (w/2, baskin, "üç öneride baskın olan karar", "#eb6834")):
-    ax.bar([i + off for i in x], [data[i+1] for i in x], width=w - 0.04,
-           color=col, edgecolor="none", zorder=3, label=lab)
-    for i in x:
-        if data[i+1]:
-            ax.text(i + off, data[i+1] + 0.3, str(data[i+1]), ha="center",
-                    fontsize=8.5, color=INK2)
-ax.set_xticks(list(x))
-ax.set_xticklabels([SOM[i+1] for i in x], fontsize=9)
-ax.set_ylim(0, max(max(enyuksek.values()), max(baskin.values())) + 2)
-ax.set_ylabel("öğrenci sayısı", fontsize=8.5, color=INK2)
-ax.yaxis.grid(True, color=GRID, linewidth=0.8, zorder=0)
-ax.set_axisbelow(True)
-for sp in ("top", "right"):
-    ax.spines[sp].set_visible(False)
-ax.tick_params(length=0)
-ax.legend(frameon=False, fontsize=8.5, loc="upper left", labelcolor=INK2)
-ax.set_title("Öğrenci başına karar somutluğu", fontsize=10.5, loc="left",
-             pad=26, weight="bold")
-ax.annotate("n = 25 öğrenci · her öğrenci üç marka önerisi getirmiştir",
-            xy=(0, 1), xycoords="axes fraction", xytext=(0, 6),
-            textcoords="offset points", fontsize=8.5, color=MUTED,
-            va="bottom", ha="left")
-fig.tight_layout()
-fig.savefig(f"{OUT}/sekil-ogrenci-profili.png", bbox_inches="tight")
-plt.close(fig)
-print("✓ sekil-ogrenci-profili.png")
+# ─── Şekil: brifin zorunlu alanlarıyla örtüşme ────────────────────────────
+PROGRAM = {"e":"Giriş ve marka eşiği","a":"Sergileme alanları","d":"Dolaşım ve mekânsal akış",
+ "q":"Satış ve kasa bölgesi","k":"Deneyim ve etkileşim alanları","t":"Deneyim ve etkileşim alanları",
+ "u":"Deneyim ve etkileşim alanları","s":"Deneyim ve etkileşim alanları","o":"Deneyim ve etkileşim alanları",
+ "m":"Malzeme ve mimari öğeler","i":"Malzeme ve mimari öğeler","r":"Malzeme ve mimari öğeler",
+ "g":"Malzeme ve mimari öğeler"}
+ZORUNLU = ["Malzeme ve mimari öğeler","Sergileme alanları","Deneyim ve etkileşim alanları",
+ "Dolaşım ve mekânsal akış","Giriş ve marka eşiği","Satış ve kasa bölgesi",
+ "Depolama ve arka alan","Personel alanları"]
+cp = collections.Counter()
+for s_, m_, n_, a_ in KOD:
+    for z in {PROGRAM[x] for x in a_.split(",") if x}: cp[z] += 1
+hbars(ZORUNLU, [cp.get(z, 0) for z in ZORUNLU], "sekil-program-kapsami.png",
+      "Kararların brifin zorunlu alanlarıyla örtüşmesi",
+      "n = 75 marka önerisi · dersin brifi sekiz alanın çözülmesini istemektedir",
+      pct_of=len(KOD),
+      note="Son dört alan, kararların neredeyse tamamında boş kalmaktadır.")
 
 # ─── Şekil: tasarım aygıtı repertuvarı ─────────────────────────────────────
 AD = {"a": "Sergileme birimi (raf, kaide, vitrin, niş)", "m": "Malzeme ve yüzey",
       "i": "Aydınlatma", "d": "Dolaşım ve plan kurgusu", "g": "Grafik ve anlatı yüzeyi",
       "u": "Üretim görünürlüğü (atölye)", "k": "Kişiselleştirme ve etkileşim istasyonu",
       "t": "Dijital ve teknoloji", "r": "Renk", "o": "Oturma ve dinlenme",
-      "s": "Koku, ses ve duyusal donatı"}
+      "s": "Koku, ses ve duyusal donatı", "e": "Giriş ve marka eşiği",
+      "q": "Satış ve kasa bölgesi"}
 ca = collections.Counter(x for *_, a in KOD for x in a.split(",") if x)
 k, v = zip(*ca.most_common())
 hbars([AD[i] for i in k], list(v), "sekil-aygit-repertuvari.png",

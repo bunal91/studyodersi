@@ -3,19 +3,39 @@
 Makaledeki tüm sayısal bulguları yeniden üretir.
 Kullanım:  python3 analiz.py
 Girdi:     data.py (marka önerileri), deger.py (değer eksenleri),
-           kod.py (somutluk ve aygıt kodlaması)
+           kod.py (tasarım öğesi kodlaması)
 """
 import collections, statistics, sys, os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from data import DATA
-from kod import KOD
 from deger import DEGER
+from kod import KOD
 
-SOM = {1: "sıfatta kalan", 2: "öğe adlandıran", 3: "mekânda yer tutan"}
 AYGIT = {"a":"Sergileme birimi (raf, kaide, vitrin, niş)","m":"Malzeme ve yüzey","i":"Aydınlatma",
  "d":"Dolaşım ve plan kurgusu","g":"Grafik ve anlatı yüzeyi","u":"Üretim görünürlüğü (atölye)",
  "k":"Kişiselleştirme ve etkileşim istasyonu","t":"Dijital ve teknoloji","r":"Renk",
- "o":"Oturma ve dinlenme","s":"Koku, ses ve duyusal donatı"}
+ "o":"Oturma ve dinlenme","s":"Koku, ses ve duyusal donatı",
+ "e":"Giriş ve marka eşiği","q":"Satış ve kasa bölgesi"}
+
+# Bitner (1992) servicescape boyutları
+BITNER = {"i":"Ortam koşulları","r":"Ortam koşulları","s":"Ortam koşulları",
+ "a":"Mekânsal yerleşim ve işlevsellik","d":"Mekânsal yerleşim ve işlevsellik",
+ "o":"Mekânsal yerleşim ve işlevsellik","k":"Mekânsal yerleşim ve işlevsellik",
+ "t":"Mekânsal yerleşim ve işlevsellik","e":"Mekânsal yerleşim ve işlevsellik",
+ "q":"Mekânsal yerleşim ve işlevsellik",
+ "m":"İşaretler, simgeler ve eserler","g":"İşaretler, simgeler ve eserler",
+ "u":"İşaretler, simgeler ve eserler"}
+
+# Dersin brifindeki sekiz zorunlu alan
+PROGRAM = {"e":"Giriş ve marka eşiği","a":"Sergileme alanları","d":"Dolaşım ve mekânsal akış",
+ "q":"Satış ve kasa bölgesi","k":"Deneyim ve etkileşim alanları","t":"Deneyim ve etkileşim alanları",
+ "u":"Deneyim ve etkileşim alanları","s":"Deneyim ve etkileşim alanları","o":"Deneyim ve etkileşim alanları",
+ "m":"Malzeme ve mimari öğeler","i":"Malzeme ve mimari öğeler","r":"Malzeme ve mimari öğeler",
+ "g":"Malzeme ve mimari öğeler"}
+ZORUNLU = ["Giriş ve marka eşiği","Sergileme alanları","Dolaşım ve mekânsal akış",
+ "Satış ve kasa bölgesi","Depolama ve arka alan","Personel alanları",
+ "Deneyim ve etkileşim alanları","Malzeme ve mimari öğeler"]
+
 TEMA = {
  "Renk, enerji ve çağdaşlık":["renk","renkli","renk çeşitliliği","dinamik","enerjik","eğlenceli","canlı","keyifli",
    "tatil","trend","feminen","çağdaş","modern","özgür","özgürlük","katman","kontrast","karanlık","tasarım",
@@ -40,32 +60,35 @@ TEMA = {
 DUYU = {"koku","esans","duyusal","duyusallık","dinleme","dokusal","ışık","sıcaklık"}
 
 
-def b(s): print(f"\n{'='*64}\n{s}\n{'='*64}")
+def b(s): print(f"\n{'='*62}\n{s}\n{'='*62}")
 
 
 def main():
     brands = [(s, g, x) for s, g, bl in DATA for x in bl]
     kws = [k for _, _, x in brands for k in x[4]]
     ck = collections.Counter(kws)
-    meta = {(s, x[0]): x for s, g, bl in DATA for x in bl}
+    N = len(KOD)
 
     b("GENEL")
-    print(f"teslim {len(DATA)} · marka önerisi {len(brands)} · çeviri hücresi {len(brands)*3}")
+    print(f"teslim {len(DATA)} · marka önerisi {N} · anahtar kelime eşleşmesi {N*3}")
 
-    b("MARKA SEÇİMİ")
+    b("1. MARKA SEÇİMİ")
     for ad, i in (("kategori", 1), ("menşe", 2), ("ölçek", 3)):
         print(f"\n{ad}:")
         for k, v in collections.Counter(x[i] for _, _, x in brands).most_common():
-            print(f"  {k:24} {v:3}  %{100*v/len(brands):.1f}")
+            print(f"  {k:24} {v:3}  %{100*v/N:.1f}")
     kur = [(s, [x[0] for x in bl if x[3] == "kurumsal"]) for s, g, bl in DATA]
     kur = [(s, k) for s, k in kur if k]
     print(f"\nen az bir kurumsal marka öneren: {len(kur)}/{len(DATA)} (%{100*len(kur)/len(DATA):.0f})")
-    for s, k in kur: print(f"  {s:28} {len(k)}/3  {', '.join(k)}")
 
-    b("ANAHTAR KELİME HAVUZU")
-    hap = sum(1 for v in ck.values() if v == 1)
-    print(f"etiket {len(kws)} · tekil {len(set(kws))} · tip/belirti {len(set(kws))/len(kws):.2f}")
-    print(f"hapax {hap} → tekillerin %{100*hap/len(set(kws)):.0f}'i · tüm etiketlerin %{100*hap/len(kws):.0f}'i")
+    b("2. MARKAYI OKUMA: DEĞER EKSENLERİ")
+    dg = collections.Counter(v for _, _, x in brands for v in DEGER[x[0]])
+    for k, v in dg.most_common():
+        print(f"  {k:36} {v:3}  %{100*v/N:.0f}")
+    print(f"  toplam etiket {sum(dg.values())} · marka başına ort. {sum(dg.values())/N:.2f}")
+
+    b("3. ANAHTAR KELİMELER")
+    print(f"etiket {len(kws)} · tekil {len(set(kws))} · yalnızca bir kez geçen {sum(1 for v in ck.values() if v == 1)}")
     print(f"en sık 10 kelime tüm etiketlerin %{100*sum(v for _, v in ck.most_common(10))/len(kws):.0f}'i")
     print("\ntematik kümeler:")
     for t, w in sorted(TEMA.items(), key=lambda x: -sum(ck[y] for y in set(x[1]))):
@@ -73,56 +96,43 @@ def main():
         print(f"  {t:32} {n:3}  %{100*n/len(kws):.1f}")
     print(f"\ndoğrudan duyu göndermeli etiket {sum(ck[d] for d in DUYU)} (%{100*sum(ck[d] for d in DUYU)/len(kws):.1f})")
 
-    b("MARKAYI OKUMA: DEĞER EKSENLERİ")
-    dg = collections.Counter(v for _, _, x in brands for v in DEGER[x[0]])
-    for k, v in dg.most_common():
-        print(f"  {k:36} {v:3}  %{100*v/len(brands):.0f}")
-    print(f"  toplam etiket {sum(dg.values())} · marka başına ort. {sum(dg.values())/len(brands):.2f}")
-
-    b("ANAHTAR KELİMEDEN MEKÂNSAL KARARA: SOMUTLUK")
-    c = collections.Counter(k[2] for k in KOD)
-    for lv in (1, 2, 3):
-        print(f"  {SOM[lv]:18} {c[lv]:3}  %{100*c[lv]/len(KOD):5.1f}")
-    ad = sum(k[3] for k in KOD)
-    print(f"  bunların içinde marka diliyle adlandırılan: {ad} (%{100*ad/len(KOD):.0f})")
-
-    per = collections.defaultdict(list)
-    for s_, m, l, n, a in KOD: per[s_].append(l)
-    print("\nöğrenci profili (üç öneri):")
-    print(f"  en az bir kez 'mekânda yer tutan' karar üreten: "
-          f"{sum(1 for v in per.values() if max(v) == 3)}/{len(DATA)}")
-    print(f"  üç önerisi de 'sıfatta kalan' ya da 'öğe adlandıran': "
-          f"{sum(1 for v in per.values() if max(v) <= 2)}/{len(DATA)}")
-    print("  üç öneride baskın:", dict(collections.Counter(
-        SOM[statistics.mode(v)] for v in per.values())))
-
-    for ad_, i_ in (("menşe", 2), ("ölçek", 3), ("kategori", 1)):
-        agg = collections.defaultdict(list)
-        for s_, m, l, n, a in KOD: agg[meta[(s_, m)][i_]].append(l)
-        print(f"\n{ad_} × 'mekânda yer tutan' oranı:")
-        for k, v in sorted(agg.items(), key=lambda x: -sum(1 for y in x[1] if y == 3)/len(x[1])):
-            if len(v) >= 3:
-                print(f"  {k:24} n={len(v):2}  %{100*sum(1 for y in v if y == 3)/len(v):.0f}")
-
-    b("TASARIM AYGITI REPERTUVARI")
-    ca = collections.Counter(x for _, _, _, _, a in KOD for x in a.split(",") if x)
-    for k, v in ca.most_common(): print(f"  {AYGIT[k]:42} {v:3}  %{100*v/len(KOD):.0f}")
+    b("4. KARARLARIN TASARIM ÖĞELERİNE DAĞILIMI")
+    ca = collections.Counter(x for *_, a in KOD for x in a.split(",") if x)
+    for k, v in ca.most_common(): print(f"  {AYGIT[k]:42} {v:3}  %{100*v/N:.0f}")
     only = sum(1 for *_, a in KOD if a and set(filter(None, a.split(","))) <= {"a", "m"})
-    print(f"\nyalnızca sergileme ve/veya malzeme ile sınırlı: {only} (%{100*only/len(KOD):.0f})")
-    for kd, ad in (("d", "dolaşım/plan"), ("s", "duyusal donatı")):
+    print(f"\nyalnızca sergileme ve/veya malzeme ile sınırlı: {only} (%{100*only/N:.0f})")
+    for kd, ad in (("d", "dolaşım"), ("s", "duyusal donatı")):
         print(f"en az bir kez {ad} kararı üreten öğrenci: "
-              f"{len({s_ for s_, m, l, n, a in KOD if kd in a.split(',')})}/{len(DATA)}")
-    print("\naygıt çeşitliliği × somutluk:")
-    for lv in (1, 2, 3):
-        sub = [k for k in KOD if k[2] == lv]
-        print(f"  {SOM[lv]:18} öneri başına ort. "
-              f"{statistics.mean(len([x for x in k[4].split(',') if x]) for k in sub):.2f} aygıt ailesi")
+              f"{len({s for s, m, n, a in KOD if kd in a.split(',')})}/{len(DATA)}")
 
-    b("MARKA DİLİYLE ADLANDIRILAN AYGITLAR")
-    nn = [(s_, m) for s_, m, l, n, a in KOD if n]
-    print(f"{len(nn)}/{len(KOD)} öneri (%{100*len(nn)/len(KOD):.0f}) · "
-          f"{len(set(s_ for s_, _ in nn))}/{len(DATA)} öğrenci")
-    for s_, m in nn: print(f"  {s_} — {m}")
+    b("5. BITNER'IN ÜÇ BOYUTU")
+    cb = collections.Counter(); kapsam = collections.Counter(); per = collections.defaultdict(set)
+    for s, m, n, a in KOD:
+        dims = {BITNER[x] for x in a.split(",") if x}
+        for d in dims: cb[d] += 1
+        kapsam[len(dims)] += 1
+        per[s] |= dims
+    for k, v in cb.most_common(): print(f"  {k:36} {v:3}  %{100*v/N:.0f} öneride")
+    print("\nöneri başına kaç boyut:")
+    for n_ in sorted(kapsam): print(f"  {n_} boyut: {kapsam[n_]:3}  %{100*kapsam[n_]/N:.0f}")
+    print(f"öğrenci düzeyinde üç boyuta da değinen: {sum(1 for v in per.values() if len(v) == 3)}/{len(DATA)}")
+
+    b("6. BRİFİN SEKİZ ZORUNLU ALANIYLA ÖRTÜŞME")
+    cp = collections.Counter()
+    for s, m, n, a in KOD:
+        for z in {PROGRAM[x] for x in a.split(",") if x}: cp[z] += 1
+    for z in ZORUNLU:
+        print(f"  {z:32} {cp.get(z, 0):3}  %{100*cp.get(z, 0)/N:3.0f}")
+    print(f"\n  değinilen alan sayısı: {len([z for z in ZORUNLU if cp.get(z, 0)])}/8")
+
+    b("7. MARKANIN DİLİYLE ADLANDIRILAN BİRİMLER")
+    nn = [(s, m) for s, m, n, a in KOD if n]
+    print(f"{len(nn)}/{N} öneri (%{100*len(nn)/N:.0f}) · {len(set(s for s, _ in nn))}/{len(DATA)} öğrenci")
+    for s, m in nn: print(f"  {s} — {m}")
+    print("\nbu önerilerin ortalama tasarım öğesi sayısı: "
+          f"{statistics.mean(len([x for x in a.split(',') if x]) for s, m, n, a in KOD if n):.2f}")
+    print("diğer önerilerde: "
+          f"{statistics.mean(len([x for x in a.split(',') if x]) for s, m, n, a in KOD if not n):.2f}")
 
 
 if __name__ == "__main__":
